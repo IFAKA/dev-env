@@ -1,0 +1,103 @@
+# Universal Development Environment - Zsh Configuration
+
+# Enable colors
+autoload -U colors && colors
+
+# History settings
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
+
+# Auto-completion with security fix
+ZSH_DISABLE_COMPFIX=true
+# Fix insecure files issue
+autoload -U compinit
+compinit -u
+setopt COMPLETE_ALIASES
+setopt AUTO_LIST
+setopt AUTO_MENU
+setopt AUTO_PARAM_SLASH
+setopt COMPLETE_IN_WORD
+
+# Directory navigation
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+# Globbing
+setopt EXTENDED_GLOB
+setopt NOMATCH
+setopt WARN_CREATE_GLOBAL
+
+# Prompt
+autoload -U promptinit && promptinit
+setopt PROMPT_SUBST
+
+# Load aliases
+if [ -f ~/.zsh_aliases ]; then
+    source ~/.zsh_aliases
+fi
+
+# Load local configuration
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# PATH
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Editor
+export EDITOR=nvim
+export VISUAL=nvim
+
+# Pager
+export PAGER=bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# FZF
+if command -v fzf &> /dev/null; then
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --glob '!.git/*'"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fi
+
+# Development environment
+export DEV_ENV_HOME="$HOME/dev-env"
+export CODE_HOME="$HOME/code"
+
+# Platform-specific settings
+case "$OSTYPE" in
+    darwin*)
+        # macOS specific
+        export PATH="/opt/homebrew/bin:$PATH"
+        ;;
+    linux*)
+        # Linux specific
+        ;;
+    *)
+        # Other platforms
+        ;;
+esac
+
+# Mobile device optimizations
+if [[ "$OSTYPE" == "android"* ]] || [[ "$OSTYPE" == "ios"* ]]; then
+    # Mobile-specific settings
+    export TERM=xterm-256color
+    export COLORTERM=truecolor
+fi

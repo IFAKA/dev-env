@@ -1,0 +1,49 @@
+[user]
+    name = Your Name
+    email = your.email@example.com
+
+[core]
+    editor = nvim
+    autocrlf = input
+    safecrlf = true
+
+[init]
+    defaultBranch = main
+
+[push]
+    default = simple
+
+[pull]
+    rebase = false
+
+[alias]
+    s = status
+    a = add
+    c = commit
+    p = push
+    l = pull
+    d = diff
+    b = branch
+    co = checkout
+    st = stash
+    sp = stash pop
+    sl = stash list
+    sd = stash drop
+    sw = stash show
+    sc = stash clear
+    sa = stash apply
+    ss = stash save
+    sb = stash branch
+    su = stash push
+    sv = stash push -m
+    sx = stash push -u
+    sy = stash push -k
+    sz = stash push -p
+    lg = log --oneline --graph --decorate --all
+    ll = log --oneline --graph --decorate
+    lf = log --oneline --graph --decorate --follow
+    lc = log --oneline --graph --decorate --committer-date-is-author-date
+    lr = log --oneline --graph --decorate --reverse
+    ls = log --oneline --graph --decorate --stat
+    lp = log --oneline --graph --decorate --patch
+    lh = log --oneline --graph --decorate --pretty=format:'%h - %an, %ar : %s'
