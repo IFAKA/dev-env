@@ -4,25 +4,28 @@ Terminal config: zsh, starship, ghostty, git.
 
 ## Install
 
+One-liner install:
+
 ```bash
-git clone git@github.com:IFAKA/dev-env.git ~/dev-env
-cd ~/dev-env && ./setup.sh install
+curl -fsSL https://raw.githubusercontent.com/IFAKA/dev-env/main/install.sh | bash
 ```
 
 With Neovim config (VimZap):
 
 ```bash
-./setup.sh install --with-vimzap
+curl -fsSL https://raw.githubusercontent.com/IFAKA/dev-env/main/install.sh | bash -s -- --with-vimzap
 ```
 
-## Uninstall (clean, no traces)
+## Manage
 
+The installer clones the repo to `~/.dev-env`. Use the setup script for management:
+
+**Check status:**
 ```bash
-./setup.sh uninstall
+~/.dev-env/setup.sh status
 ```
 
-## Status
-
+**Uninstall (clean, no traces):**
 ```bash
-./setup.sh status
+~/.dev-env/setup.sh uninstall
 ```
