@@ -14,6 +14,7 @@ declare -a CONFIG_SOURCES=(
   "configs/ghostty/config"
   "configs/git/.gitconfig"
   "configs/git/ignore"
+  "configs/launchagents/com.ollama.server.plist"
 )
 declare -a CONFIG_TARGETS=(
   "$HOME/.zshrc"
@@ -23,6 +24,7 @@ declare -a CONFIG_TARGETS=(
   "$HOME/.config/ghostty/config"
   "$HOME/.gitconfig"
   "$HOME/.config/git/ignore"
+  "$HOME/Library/LaunchAgents/com.ollama.server.plist"
 )
 
 # Colors
@@ -94,6 +96,16 @@ do_install() {
   done
 
   echo ""
+
+  # Load LaunchAgents
+  echo "Loading LaunchAgents..."
+  local plist_path="$HOME/Library/LaunchAgents/com.ollama.server.plist"
+  if [[ -L "$plist_path" ]]; then
+    launchctl load "$plist_path" 2>/dev/null || true
+    echo -e "  ${GREEN}LOADED${NC} Ollama service"
+  fi
+
+  echo ""
   echo "Done."
 
   if $with_vimzap; then
@@ -111,6 +123,13 @@ do_uninstall() {
 
   echo "Uninstalling dev-env configs..."
   echo ""
+
+  # Unload LaunchAgents first
+  local plist_path="$HOME/Library/LaunchAgents/com.ollama.server.plist"
+  if [[ -L "$plist_path" ]]; then
+    launchctl unload "$plist_path" 2>/dev/null || true
+    echo -e "  ${RED}UNLOAD${NC} Ollama service"
+  fi
 
   local restored=0
   local removed=0
