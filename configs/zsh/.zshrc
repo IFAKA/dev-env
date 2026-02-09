@@ -26,6 +26,9 @@ export COLORTERM=truecolor
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Ollama CORS - allow Chrome extension access
+export OLLAMA_ORIGINS="*"
+
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
 
