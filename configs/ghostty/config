@@ -1,0 +1,23 @@
+# Ghostty Configuration for SFCC-LazyVim
+# Copy this to ~/.config/ghostty/config
+
+# Font Configuration
+font-family = "Hack Nerd Font"
+font-size = 14
+
+# Terminal Configuration
+term = xterm-256color
+
+# Window Configuration
+window-width = 1200
+window-height = 800
+
+# Colors (Dark Theme)
+background = #1e1e1e
+foreground = #d4d4d4
+cursor-color = #ffffff
+selection-background = #264f78
+
+# Performance
+background-opacity = 1
+keybind = shift+enter=text:\n

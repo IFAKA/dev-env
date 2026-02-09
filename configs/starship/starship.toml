@@ -1,0 +1,87 @@
+# Personalized prompt for your tech stack
+# Shows: directory > branch > git status > node/go version > docker > duration > prompt
+
+format = """$directory$git_branch$git_status$nodejs$golang$docker_context$cmd_duration$character"""
+
+# No newline before prompt
+add_newline = false
+
+[character]
+success_symbol = "[›](white)"
+error_symbol = "[›](red)"
+
+[directory]
+style = "white"
+truncation_length = 2
+truncate_to_repo = true
+format = "[$path]($style) "
+
+[git_branch]
+style = "dimmed white"
+format = "[$branch]($style) "
+
+# Git status - shows changed/staged files
+[git_status]
+style = "yellow"
+format = "[$all_status$ahead_behind]($style) "
+conflicted = "=$count "
+ahead = "↑$count "
+behind = "↓$count "
+diverged = "↕$count "
+untracked = "?$count "
+stashed = "\$$count "
+modified = "!$count "
+staged = "+$count "
+renamed = "»$count "
+deleted = "✘$count "
+
+# Node.js - shows version when package.json exists
+# Super useful since you have many projects with different Node versions!
+[nodejs]
+style = "green"
+format = "[node $version]($style) "
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+detect_extensions = []
+
+# Go - shows version when go.mod exists
+[golang]
+style = "cyan"
+format = "[go $version]($style) "
+
+# Docker context - shows when in a Docker project
+[docker_context]
+style = "blue"
+format = "[docker $context]($style) "
+only_with_files = true
+detect_files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
+
+# Command duration - shows when command takes > 2 seconds
+[cmd_duration]
+style = "dimmed white"
+format = "[took $duration]($style) "
+min_time = 2000
+
+# Keep these disabled - you don't use them much
+[python]
+disabled = true
+
+[ruby]
+disabled = true
+
+[rust]
+disabled = true
+
+[java]
+disabled = true
+
+[package]
+disabled = true
+
+[username]
+disabled = true
+
+[hostname]
+disabled = true
+
+[time]
+disabled = true
